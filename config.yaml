@@ -1,0 +1,37 @@
+# csi300_volatility_trader/config.yaml
+
+# ... (data_settings部分保持不变) ...
+
+data_settings:
+  ticker: "sh000300"
+  start_date: "2015-01-01"
+  end_date: "2024-12-31"
+
+# -------------------
+# GARCH模型设置 (结构更新)
+# -------------------
+model_settings:
+  train_split_ratio: 0.8
+  # 更新: 使用字典列表来定义模型及其特定参数
+  models_to_test:
+    - name: "GARCH"
+      params: { vol: "GARCH", p: 1, q: 1, o: 0 }
+    - name: "EGARCH"
+      params: { vol: "EGARCH", p: 1, q: 1, o: 1 } # EGARCH也需要o=1
+    - name: "GJR-GARCH"
+      params: { vol: "GARCH", p: 1, q: 1, o: 1 } # GJR-GARCH的关键是o=1
+
+  # 通用参数
+  ar_lags: 1
+  distribution: 't'
+
+# ... (strategy_settings 和 output_settings 保持不变) ...
+
+strategy_settings:
+  target_annual_vol: 0.20
+  max_leverage: 2.0
+  risk_free_rate: 0.02
+
+output_settings:
+  results_dir: "results"
+  diagnostics_dir: "diagnostics"

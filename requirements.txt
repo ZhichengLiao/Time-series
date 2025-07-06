@@ -1,0 +1,8 @@
+pandas
+numpy
+akshare
+matplotlib
+arch
+statsmodels
+tqdm
+pyyaml  # For reading the new config file
